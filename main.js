@@ -10,8 +10,6 @@ class TaskExporterSettingTab extends PluginSettingTab {
         const { containerEl } = this;
         containerEl.empty();
 
-        containerEl.createEl('h2', { text: 'Task Exporter Settings' });
-
         new Setting(containerEl)
             .setName('Output filename')
             .setDesc('Name of the file where tasks will be exported')
@@ -82,7 +80,7 @@ class TaskExporter extends Plugin {
 
         this.addCommand({
             id: 'export-tasks',
-            name: 'Export Tasks Now',
+            name: 'Export tasks now',
             callback: () => this.exportTasks(),
         });
     }
@@ -134,19 +132,16 @@ class TaskExporter extends Plugin {
                 "\n\nCompleted Today:\n" +
                 completedTodayTasks.join("\n");
 
-            await this.app.vault.adapter.write(
-                this.settings.outputFileName,
-                tasksText
-            );
+            const outputFile = this.app.vault.getAbstractFileByPath(this.settings.outputFileName);
+            if (outputFile instanceof TFile) {
+                await this.app.vault.modify(outputFile, tasksText);
+            } else {
+                await this.app.vault.create(this.settings.outputFileName, tasksText);
+            }
 
-            console.log(
-                `Exported ${uncompletedTasks.length} uncompleted tasks and ` +
-                `${completedTodayTasks.length} tasks completed today to ${this.settings.outputFileName}`
-            );
-
+            new Notice(`Exported ${uncompletedTasks.length + completedTodayTasks.length} tasks`);
         } catch (error) {
-            console.error('Error exporting tasks:', error);
-            new Notice('Error exporting tasks. Check console for details.');
+            new Notice('Error exporting tasks');
         }
     }
 
@@ -157,4 +152,4 @@ class TaskExporter extends Plugin {
     }
 }
 
-module.exports = TaskExporter;ds
+module.exports = TaskExporter;
