@@ -1,6 +1,10 @@
 # Daily Task Exporter
 
-My first Obsidian plugin! This plugin helps you keep track of your tasks by exporting them to a separate file. It's pretty simple - it just looks for checkbox tasks in your notes and appends them to a text file.
+My first Obsidian plugin! 
+
+This plugin is for Obsidian users that keep their tasks in their respective daily notes, and would like to export all open tasks without using the inbuilt querying, for realtime use with LLMs.
+
+It's pretty simple - it just looks for checkbox tasks in your notes and appends them to a text file.
 
 It's basically a manual API to make daily tasks and task completion accessible to other progrms. In an ideal world, the Tasks plugin or Dataview plugin could summarise all this data and save it to a text file, but unfortunately not.
 
@@ -27,7 +31,7 @@ The plugin will create a file (default is "Task List.txt") with all your tasks.
 ## Settings
 
 - Output filename: Where to save the tasks
-- Exclude folders: Folders you want to skip
+- Exclude folders: Folders you want to skip 
 - Task patterns: How to find your tasks (it's using regex but the defaults should work fine)
 
 ## Thank you!
