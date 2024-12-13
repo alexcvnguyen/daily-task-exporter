@@ -1,0 +1,9 @@
+{
+    "id": "daily-task-exporter",
+    "name": "Daily Task Exporter",
+    "author": "Alex Nguyen",
+    "description": "Export your tasks to a separate file for external program access. Automatically tracks both checked and unchecked tasks across your vault.",
+    "repo": "alexcvnguyen/daily-task-exporter",
+    "branch": "main",
+    "isDesktopOnly": true
+}
